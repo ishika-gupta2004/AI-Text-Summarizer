@@ -1,11 +1,13 @@
-🤖 AI Text Summarizer (MERN + AI)
+🤖 30-AI-Integrationsr (MERN + AI)
 
-An AI-powered Text Summarizer built using the MERN Stack and a free AI model. Users can enter long text, and the application generates a concise summary using an LLM.
----
+A collection of real-world AI features built with the MERN Stack using free LLMs via OpenRouter.
+This repository is part of my **"AI in MERN: 30 Real-World AI Integrations Using Free LLMs"** learning series.
 
 🚀 Features
 
-- ✨ AI-powered text summarization
+- ✅ AI Text Summarizer
+- ✅ AI Email Generator
+
 - 📝 User-friendly React interface
 - ⚡ Express.js backend API
 - 🤖 Free AI model integration
