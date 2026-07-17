@@ -1,7 +1,8 @@
 const express = require ('express');
 const router = express.Router();
 
-const {summarizeText} = require ("../controllers/aiController");
+const {summarizeText , generateEmail} = require ("../controllers/aiController");
 
 router.post("/summarize", summarizeText);
+router.post("/email", generateEmail);
 module.exports = router;

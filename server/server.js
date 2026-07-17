@@ -7,7 +7,7 @@ const app = express(); //this create express application
 app.use(cors());
 app.use(express.json());
 
-app.get("/",(req,resp)=>{
+app.get("/",(req,resp)=>{   
     resp.send("Hey")
 })
 console.log(process.env.OPENROUTER_API_KEY);

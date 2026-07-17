@@ -1,55 +1,67 @@
 const axios = require("axios");
+const callAI = require("../services/aiService")
 
 const summarizeText = async (req, res) => {
     try {
+
         const { text } = req.body;
+        const prompt = `Summarize the following text in only 3 lines:${text}`;
 
-        // Send request to OpenRouter
-        const response = await axios.post(
-            "https://openrouter.ai/api/v1/chat/completions",
+        const summary = await callAI(prompt);
 
-            // DATA
-            {
-                model: "openrouter/free",
-                messages: [
-                    {
-                        role: "user",
-                        content: `Summarize the following text in only 3 lines:
-
-                            ${text}`,
-                    },
-                ],
-            },
-
-            // CONFIG
-            {
-                headers: {
-                    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-
-        // Get AI response
-        const summary = response.data.choices[0].message.content;
-
-        // Send summary to client
-        res.status(200).json({
+        res.json({
             success: true,
             summary,
         });
 
     } catch (error) {
-        console.log("Error:", error.response?.data || error.message);
+
+        console.log(error.message);
 
         res.status(500).json({
             success: false,
             message: "Something went wrong",
-            error: error.response?.data || error.message,
         });
+
     }
+
+};
+
+// email
+
+const generateEmail = async (req, res) => {
+
+    try {
+
+        const { recipient, reason, tone } = req.body;
+
+        const prompt = `
+                    Write a ${tone} email.
+                    Recipient: ${recipient}
+                    Reason: ${reason}
+                    Generate only the email.
+`;
+
+        const email = await callAI(prompt);
+
+        res.json({
+            success: true,
+            email,
+        });
+
+    } catch (error) {
+
+        console.log(error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Email generation failed",
+        });
+
+    }
+
 };
 
 module.exports = {
-    summarizeText,
+    summarizeText, generateEmail
 };
